@@ -70,3 +70,78 @@ body{
     background: linear-gradient(to bottom, #770101, #390000);
     color: #9c9c9c;
 }
+
+.viewpopup{
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    outline: 0;
+    border: 2px solid #770101;
+    background: #ffcc00;
+    cursor: pointer;
+    position: relative;
+    color: #111;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 2rem 0;
+    transition: 200ms ease-in-out;
+}
+
+.viewpopup:hover{
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 4px #aa0000, 0 0 15px rgba(255, 204, 0, 0.4);
+}
+
+#popup{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 800px;
+    backdrop-filter: blur(5px);
+    background-color: #ffffff99;
+    border-radius: 0.3rem;
+    margin: 0 auto;
+    overflow: scroll;
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.row{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 2rem;
+}
+
+.row p,.row .cont,.row h2{
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.row p{
+    font-size: 1.3rem;
+}
+
+.row img{
+    height: 80%;
+    aspect-ratio: 1;
+}
+
+#popup button{
+    margin: 0.5rem;
+    font-size: 1rem;
+    width: min-content;
+    margin: 0 auto;
+    color: #fefefe;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #000000b9;
+    border: 1px solid #fefefe;
+    outline: none;
+    cursor: pointer;
+}
