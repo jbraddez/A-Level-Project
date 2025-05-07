@@ -60,7 +60,9 @@
     left: 0;
     transition: 0.2s ease-in-out;
 }
-
+html{
+    background: #c40000;
+}
 body{
     background: linear-gradient(#c40000,#ffcc00);
     min-height: 100svh;
