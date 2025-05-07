@@ -23,9 +23,19 @@
     background: linear-gradient(315deg,#a8a2a2, #efefef);
 }
 
+#notification.green{
+    border-color: #5f9e76;
+    border-left-color: #5f9e76;
+}
+
+#notification.red{
+    border-color: #aa0000;
+    border-left-color: #aa0000;
+}
+
 .showNoti{
     display: block !important;
-    animation: notification 2s linear;
+    animation: notification 3s linear;
 }
 
 @keyframes notification{
