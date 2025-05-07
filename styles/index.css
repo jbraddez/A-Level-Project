@@ -1,0 +1,51 @@
+body{
+    background-image: url('/images/homebg.webp');
+    background-size: cover cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-color: #1e0704;
+    height: 100svh;
+    overflow: hidden;
+}
+main {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    max-height: 45vh;
+    display: flex;
+    background: transparent;
+    gap: 1rem;
+    padding: 0 2rem;
+}
+
+main a {
+    position: relative;
+    display: block;
+    width: 50%;
+    transform: rotate(var(--angle)) translateY(var(--translate));
+    transition: transform 0.3s ease, bottom 0.3s ease;
+    cursor: pointer;
+}
+
+main a:hover {
+    transform: rotate(0deg) translateY(-20px);
+}
+
+main a img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.text{
+    position: relative;
+    top: 33%;
+    transform: translateY(-33%);
+    color: #fefefe;
+    margin: 0 auto;
+    text-align: center;
+}

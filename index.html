@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Project</title>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <div class="text">
+        <h1>Welcome to the Casino</h1>
+        <p>Take a card to get playing!</p>
+    </div>
+
+    <main>
+        <a id="blackjack" href="/games/blackjack.html" style="--angle: -15deg; --translate: 0">
+            <img src="/images/blackjack.png" alt="BlackJack">
+        </a>
+        <a id="roulette" href="/games/roulette.html" style="--angle: 0deg; --translate: -10px">
+            <img src="/images/roulette.png" alt="Roulette">
+        </a>
+        <a id="slots" href="/games/slots.html" style="--angle: 15deg; --translate: 0">
+            <img src="/images/slot.png" alt="Slot Machine">
+        </a>
+    </main>    
+
+    <div id="notification">
+    </div>
+
+    <div class="chips-sec">
+        <p id="chips">0</p>
+        <img src="/images/chip.svg" alt="Chips">
+    </div>
+ 
+    <script src="/scripts/script.js"></script>
+</body>
+</html>
