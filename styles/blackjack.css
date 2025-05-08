@@ -1,0 +1,72 @@
+body{
+    background-color: #0B6623;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1%, transparent 20%), 
+                      radial-gradient(circle, rgba(0, 0, 0, 0.1) 1%, transparent 20%);
+    background-size: 15px 15px;
+    background-position: 0 0, 7.5px 7.5px;
+}
+
+/*player*/
+
+.chipBox{
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.chipBox .row{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 3rem;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: fit-content;
+}
+
+.row button{
+    all: unset;
+    height: 100%;
+    cursor: pointer;
+    aspect-ratio: 1;
+    transition: 200ms;
+}
+
+.row button:hover,.row button:focus{
+    scale: 1.05;
+    filter: drop-shadow(0 0.3rem 0.3rem #00000099);
+}
+
+.row button img{
+    height: 100%;
+    width: 100%;
+}
+
+#betsText{
+    color: #fefefe;
+}
+
+#betsCont{
+    margin: 0.5rem 0;
+}
+
+.playerCards{
+    display: flex;
+    width: 100%;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,50%);
+    max-width: 100%;
+    max-width: 600px;
+    padding: 0 0.5rem;
+}
+
+.cardcont,.cardcont img{
+    height: 100%;
+    width: 100%;
+}

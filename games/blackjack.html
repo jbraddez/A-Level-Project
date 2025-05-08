@@ -4,8 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlackJack | Casino Project</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styles/blackjack.css">
 </head>
 <body>
-    
+    <header>
+        <a href="/" class="homelink"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></a><!--home-->
+
+        <div id="notification">
+        </div>
+
+        <div class="chips-sec">
+            <p id="chips"></p>
+            <img src="/images/chip.svg" alt="Chips">
+        </div>
+    </header>
+
+
+
+    <div class="playerCards">
+        <div id="card1" class="cardcont">
+            <img src="/images/blackjack.png" alt="BlackJack">
+        </div>
+        <div id="card2" class="cardcont">
+            <img src="/images/blackjack.png" alt="BlackJack">
+        </div>
+    </div>
+
+    <div class="chipBox">
+        <div class="row">
+            <button><img src="/images/chips/100.png" alt="100"></button>
+            <button><img src="/images/chips/250.png" alt="250"></button>
+            <button><img src="/images/chips/500.png" alt="500"></button>
+        </div>
+        <div class="row">
+            <button><img src="/images/chips/1000.png" alt="1000"></button>
+            <button><img src="/images/chips/2500.png" alt="2500"></button>
+            <button><img src="/images/chips/5000.png" alt="5000"></button>
+        </div>
+        <p id="betsText">Place your bets</p>
+
+        <div id="betsCont">
+
+        </div>
+    </div>
+
+
+    <script src="/scripts/blackjack.js"></script>
+    <script src="/scripts/script.js"></script>
 </body>
 </html>
