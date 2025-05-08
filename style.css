@@ -17,19 +17,16 @@
     margin: 0.5rem 0;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    border: 1px solid #5f9e76;
     box-shadow: 0 0.5rem 0.5rem #00000099;
     border-left: 5px solid #5f9e76;
     background: linear-gradient(315deg,#a8a2a2, #efefef);
 }
 
 #notification.green{
-    border-color: #5f9e76;
     border-left-color: #5f9e76;
 }
 
 #notification.red{
-    border-color: #aa0000;
     border-left-color: #aa0000;
 }
 
@@ -87,4 +84,10 @@
 .chips-sec img{
     filter: brightness(0) saturate(100%) invert(82%) sepia(20%) saturate(2316%) hue-rotate(354deg) brightness(103%) contrast(112%);
     height: 100%;
+}
+
+.homelink{
+    position: relative;
+    top: 0.5rem;
+    margin: 0.5rem;
 }
