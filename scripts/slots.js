@@ -23,6 +23,10 @@ function spinReel(imgElement, duration) {
         const item = items[Math.floor(Math.random() * items.length)];
         imgElement.src = `/images/slots/${item}.webp`;
         imgElement.alt = item;
+        imgElement.classList.add('spin')
+            setTimeout(() => {
+            imgElement.classList.remove('spin')
+            }, 99);
         count++;
 
         if (count > maxCount) {
@@ -32,7 +36,7 @@ function spinReel(imgElement, duration) {
             imgElement.alt = finalItem;
             addItems(finalItem);
         }
-    }, 100);
+    }, 150);
 }
 
 let currentBet = 0;

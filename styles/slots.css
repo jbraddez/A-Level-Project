@@ -160,3 +160,15 @@ body{
     outline: none;
     cursor: pointer;
 }
+
+.spin{
+    animation: spin 150ms linear;
+}
+
+@keyframes spin {
+    0%{
+        transform: translateY(-100%);
+    }100%{
+       transform: translateY(150%);
+    }
+}
