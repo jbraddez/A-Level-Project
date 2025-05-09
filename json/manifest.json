@@ -1,0 +1,15 @@
+{
+    "name": "Casino Project",
+    "short_name": "Casino",
+    "description": "My A-Level casino project.",
+    "start_url": "/",
+    "display": "standalone",
+    "icons": [
+        {
+        "src": "/images/chips/100.png",
+        "sizes": "512x512",
+        "type": "image/png"
+        }
+    ]
+}
+  
