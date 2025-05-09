@@ -169,17 +169,106 @@ function hit(){
     addValue(data.value,'player');
     const annotation = getCardAnnotation(data);
     const img = document.createElement('img');
-    img.src = imgPath + annotation + ".png"
-    img.alt = annotation
+    img.src = imgPath + annotation + ".png";
+    img.alt = annotation;
     const container = document.getElementById(`card${nextCard}`);
     const index = container.childElementCount;
     const translateVal = -(9*(10-index)) -(100*(index-1));
     img.style.transform = `translateY(${translateVal}%)`;
-    console.log(translateVal);
 
     container.appendChild(img);
     nextCard = 3 - nextCard;
 
-    //check if bust - if so check if aces - if so remove 10 and log an ace 
-    
+    hideButtons();
+
+    setTimeout(() => {
+        checkPlayerValue();
+    }, 500);
+}
+
+function checkPlayerValue(){
+    const value = parseInt(playerValueEl.textContent); 
+    if(value > 21){
+        if(checkForAces('player')){
+            const text = value - 10;
+            playerValueEl.textContent = text;
+        }else{
+            //bust - end game
+        }
+    }
+
+    if(value == 21){
+        //check dealer cards - if card2 back card get another, and check then end 
+    }
+
+    if(value < 21){
+        dealerPlay();
+    }
+}
+
+function checkDealerValue(){
+    const value = parseInt(dealerValueEl.textContent); 
+    if(value > 21){
+        if(checkForAces('dealer')){
+            const text = value - 10;
+            dealerValueEl.textContent = text;
+        }else{
+            //bust - end game - dealer loses
+        }
+    }
+
+    if(value == 21){
+        //dealer wins
+    }
+
+    if(value < 21){
+        showButtons();// player plays
+    }
+}
+
+
+let dealerNextCard = 2;
+function dealerPlay(){
+    const data = getCard();
+    addValue(data.value,'dealer');
+    const annotation = getCardAnnotation(data);
+
+    const img = document.createElement('img');
+    img.src = imgPath + annotation + ".png";
+    img.alt = annotation;
+    img.style.position = 'absolute';
+    const container = document.getElementById(`d-card${dealerNextCard}`);
+    const index = container.childElementCount;
+    img.style.transform = `translateY(-${10*(index-1)}%)`;
+
+    if(document.querySelector('#d-card2 img').alt == "Back"){
+        console.log(dealerCard2);
+        dealerCard2.remove();
+        img.style.position = 'relative';
+        img.style.transform = 'translateY(10%)';
+    }
+
+    container.appendChild(img);
+    dealerNextCard = 3 - dealerNextCard;
+}
+
+
+let aces = 0;
+function checkForAces(user){
+    let cards;
+    if(user == 'dealer'){
+        cards = document.querySelectorAll('.dealerCards img');
+    }else if(user == 'player'){
+        cards = document.querySelectorAll('.playerCards img');
+    }
+    let totalAces = cards.filter(card => card.alt.includes('A')).length;
+    cards.forEach(card => {
+        if(card.alt.includes('A')){
+            if (aces < totalAces) {
+                aces++;
+                return true;
+            }
+        }
+    });
+    return false;
 }
