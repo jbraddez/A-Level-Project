@@ -23,6 +23,11 @@
 
 
     <div class="playerCards">
+        <div class="playerOptions bet-btns">
+            <button onclick="stand()" class="player-btns" id="stand">Stand</button>
+            <p id="playerValue">0</p>
+            <button onclick="hit()" class="player-btns" id="hit">Hit</button>
+        </div>
         <div id="card1" class="cardcont">
             <img src="/images/blackjack.png" alt="BlackJack">
         </div>
@@ -32,21 +37,37 @@
     </div>
 
     <div class="chipBox">
-        <div class="row">
-            <button><img src="/images/chips/100.png" alt="100"></button>
-            <button><img src="/images/chips/250.png" alt="250"></button>
-            <button><img src="/images/chips/500.png" alt="500"></button>
+        <div class="bet-btns">
+            <button onclick="clearBet()" id="clearBet">Clear</button>
+            <button onclick="start()" id="start" class="disabled">Start</button>
         </div>
         <div class="row">
-            <button><img src="/images/chips/1000.png" alt="1000"></button>
-            <button><img src="/images/chips/2500.png" alt="2500"></button>
-            <button><img src="/images/chips/5000.png" alt="5000"></button>
+            <button onclick="addBet(100)"><img src="/images/chips/100.png" alt="100"></button>
+            <button onclick="addBet(250)"><img src="/images/chips/250.png" alt="250"></button>
+            <button onclick="addBet(500)"><img src="/images/chips/500.png" alt="500"></button>
+        </div>
+        <div class="row">
+            <button onclick="addBet(1000)"><img src="/images/chips/1000.png" alt="1000"></button>
+            <button onclick="addBet(2500)"><img src="/images/chips/2500.png" alt="2500"></button>
+            <button onclick="addBet(5000)"><img src="/images/chips/5000.png" alt="5000"></button>
         </div>
         <p id="betsText">Place your bets</p>
-
+        <p id="betAmount"></p>
         <div id="betsCont">
 
         </div>
+    </div>
+
+    <div id="dealerBox">
+        <div class="dealerCards">
+            <div id="d-card1" class="cardcont">
+                <img src="https://deckofcardsapi.com/static/img/back.png" alt="">
+            </div>
+            <div id="d-card2" class="cardcont">
+                <img src="https://deckofcardsapi.com/static/img/back.png" alt="">
+            </div>
+        </div>
+        <p id="dealerValue">0</p>
     </div>
 
 
