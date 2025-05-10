@@ -179,7 +179,6 @@ function dealerStart(){
     const annotation = getCardAnnotation(data);
     addValue(data.value,'dealer');
     dealerCard1Cont.firstElementChild.src = imgPath + annotation + '.png';
-    console.log(imgPath + annotation);
     dealerCard1Cont.firstElementChild.alt = annotation;
     dealerCard2.src = backImgPath;
 
@@ -188,6 +187,11 @@ function dealerStart(){
 }
 let doubled_down = false
 function doubleDown(){
+    if(bet > getChips()){
+        showNotification('Insufficient Chips', 'You do not have enough chips to double down', 'red');
+        doubleDownEl.classList.add('disabled');
+        return;
+    }
     minusChips(bet);
     bet*=2;
     doubled_down = true;
@@ -302,7 +306,11 @@ function checkPlayerValue(){
     const value = parseInt(playerValueEl.textContent); 
     // if doubled down dealer must play - if not check the value to determine what to do
     if(doubled_down){
-        dealerPlay();
+        if(value <= 21){
+            dealerPlay();
+        }else{
+            compareScores();
+        }
     }else{
         if(value > 21){
             if(checkForAces('player')){
@@ -359,7 +367,6 @@ function compareScores(){
     hideButtons();
     const playerScore = parseInt(playerValueEl.textContent);
     const dealerScore = parseInt(dealerValueEl.textContent);
-    console.log(bet);
     
 
     let winnings;
@@ -462,7 +469,6 @@ function dealerPlay(){
 
 
 function checkForAces(user){
-    console.log('checking aces for ', user)
     if(user == 'dealer'){
         if(dealerAces > 0){
             dealerAces--;
@@ -490,6 +496,7 @@ function resetGame(){
     dealerMustEnd = false;
     onFirstCards = false;
     doubled_down = false;
+    doubleDownEl.classList.remove('disabled');
 
     let p_cardconts = document.querySelectorAll('.playerCards .cardcont');
     p_cardconts.forEach(parent => {
