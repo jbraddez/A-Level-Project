@@ -239,6 +239,7 @@ body{
 }
 
 #doubleDown{
+    display: none;
     position: absolute;
     top: -45%;
 }

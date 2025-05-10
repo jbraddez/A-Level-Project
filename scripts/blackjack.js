@@ -159,7 +159,7 @@ function playerStart(){
     card2.src = imgPath + annotation2 + ".png";
     card2.alt = annotation2;
 
-
+    onFirstCards = true;
     if(parseInt(playerValueEl.textContent) >= 21){
         checkPlayerValue();
     }
@@ -182,8 +182,14 @@ function dealerStart(){
     dealerCard1Cont.firstElementChild.alt = annotation;
     dealerCard2.src = backImgPath;
 
-    doubleDownEl.style.display = 'block';
-    showButtons();
+    if(dealerMustEnd){
+        dealerPlay();
+    }else{
+        doubleDownEl.style.display = 'block';
+        showButtons();
+    }
+    
+    
 }
 let doubled_down = false
 function doubleDown(){
@@ -325,10 +331,10 @@ function checkPlayerValue(){
     
         if(value == 21){
             //check dealer cards - if card2 back card get another, and check then end 
+            dealerPlay();
             if(checkBlackjack()){
                 dealerMustEnd = true;
             }
-            dealerPlay();
         }
     
         if(value < 21){
@@ -336,6 +342,7 @@ function checkPlayerValue(){
         }
     }
 }
+let onFirstCards = false;
 
 function checkDealerValue(){
     const value = parseInt(dealerValueEl.textContent); 
