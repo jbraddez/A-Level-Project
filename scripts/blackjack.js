@@ -259,6 +259,7 @@ function showButtons(){
 let nextCard = 1;
 function hit(){
     const data = getCard();
+    hideButtons();
 
     addValue(data.value,'player');
     const annotation = getCardAnnotation(data);
@@ -273,7 +274,6 @@ function hit(){
     container.appendChild(img);
     nextCard = 3 - nextCard;
 
-    hideButtons();
 
     setTimeout(() => {
         checkPlayerValue();
@@ -283,6 +283,7 @@ function hit(){
 let standing = false;
 function stand(){
     standing = true;
+    hideButtons();
     dealerPlay();
 }
 
