@@ -337,7 +337,7 @@ function checkDealerValue(){
     if(value < 21){
         setTimeout(() => {
             dealerPlay();
-        }, 500);
+        }, 1000);
     }
 }
 
