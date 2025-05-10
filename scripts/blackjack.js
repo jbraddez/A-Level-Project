@@ -77,6 +77,10 @@ function playerStart(){
     card1.src = imgPath + getCardAnnotation(data1) + ".png";
     card2.src = imgPath + getCardAnnotation(data2) + ".png";
 
+    if(parseInt(playerValueEl.textContent) == 21){
+        checkPlayerValue();
+    }
+
     setTimeout(() => {
         dealerStart();
     }, 500);
@@ -186,6 +190,12 @@ function hit(){
     }, 500);
 }
 
+let standing = false;
+function stand(){
+    standing = true;
+    dealerPlay();
+}
+
 function checkPlayerValue(){
     const value = parseInt(playerValueEl.textContent); 
     if(value > 21){
@@ -193,16 +203,23 @@ function checkPlayerValue(){
             const text = value - 10;
             playerValueEl.textContent = text;
         }else{
-            //bust - end game
+            //compare scores - end game func - player lose
+            compareScores();
         }
     }
 
     if(value == 21){
         //check dealer cards - if card2 back card get another, and check then end 
+        if(document.querySelector('#d-card2 img').alt == "Back"){
+            dealerPlay();
+        }
+
+        //compare score - end game func
+        compareScores();
     }
 
     if(value < 21){
-        dealerPlay();
+        showButtons();
     }
 }
 
@@ -214,42 +231,123 @@ function checkDealerValue(){
             dealerValueEl.textContent = text;
         }else{
             //bust - end game - dealer loses
-        }
+        compareScores();
+    }
     }
 
     if(value == 21){
-        //dealer wins
+        //dealer wins - end game
+        compareScores();
     }
 
     if(value < 21){
-        showButtons();// player plays
+        setTimeout(() => {
+            dealerPlay();
+        }, 500);
+    }
+}
+
+const resultEl = document.getElementById('result');
+function compareScores(){
+    const playerScore = parseInt(playerValueEl.textContent);
+    const dealerScore = parseInt(dealerValueEl.textContent);
+    console.log(bet);
+    
+
+    let winnings;
+
+    setTimeout(() => {
+        dealerBox.style.display = 'none';
+    }, 1000);
+
+    setTimeout(() => {
+        resultEl.style.display = 'block';
+        //check player or dealer gone bust
+        if(playerScore > 21){
+            winnings = 0;
+            resultEl.textContent = "You're Bust!";
+            showNotification('Dealer Wins', 'You went bust, you won 0 chips.','red');
+        }else if(dealerScore > 21){
+            winnings = bet * 2;
+            resultEl.textContent = "Dealer's Bust!";
+            showNotification('You Win', `The dealer went bust, you won ${winnings} chips.`,'green');
+        }else{
+            if(playerScore == dealerScore){
+                winnings = 0;
+                resultEl.textContent = "You Tied!";
+                showNotification('No one wins', 'You tied with the dealer, you won 0 chips.','red');
+            }else{
+                //check if player got blackjack
+                if(playerScore == 21 && checkBlackjack()){
+                    winnings = bet * 2.5;
+                    resultEl.textContent = "BlackJack!";
+                    showNotification('You Win', `You got blackjack, you won ${winnings} chips.`,'green');
+                }//otherwise, dealer must've beat player
+                else{
+                    //check player beat dealer if not dealer won
+                    if(playerScore > dealerScore){
+                        winnings = bet * 2;
+                        resultEl.textContent = "You Win!";
+                        showNotification('You Win', `You beat the dealer, you won ${winnings} chips.`,'green');
+                    }else{
+                        winnings = 0;
+                        resultEl.textContent = "Dealer Wins!";
+                        showNotification('Dealer Wins', `The dealer beat you, you won 0 chips.`,'red');
+                    }
+                }
+            }
+        }
+
+        if(winnings > 0){
+            addChips(winnings);
+        }
+
+        setTimeout(() => {
+            resetGame();
+        }, 500);
+    }, 1500);
+}
+
+function checkBlackjack(){
+    const cards = document.querySelectorAll('.playerCards img');
+    if(cards.length > 2){
+        return false;
+    }else if(cards.length == 2){
+        return true;
+    }else{
+        console.log('Player cards has less than 2 items.')
     }
 }
 
 
 let dealerNextCard = 2;
 function dealerPlay(){
-    const data = getCard();
-    addValue(data.value,'dealer');
-    const annotation = getCardAnnotation(data);
-
-    const img = document.createElement('img');
-    img.src = imgPath + annotation + ".png";
-    img.alt = annotation;
-    img.style.position = 'absolute';
-    const container = document.getElementById(`d-card${dealerNextCard}`);
-    const index = container.childElementCount;
-    img.style.transform = `translateY(-${10*(index-1)}%)`;
-
-    if(document.querySelector('#d-card2 img').alt == "Back"){
-        console.log(dealerCard2);
-        dealerCard2.remove();
-        img.style.position = 'relative';
-        img.style.transform = 'translateY(10%)';
+    const dealerScore = parseInt(dealerValueEl.textContent);
+    if(dealerScore >= 17){
+        compareScores();
+    }else{
+        const data = getCard();
+        addValue(data.value,'dealer');
+        const annotation = getCardAnnotation(data);
+    
+        const img = document.createElement('img');
+        img.src = imgPath + annotation + ".png";
+        img.alt = annotation;
+        img.style.position = 'absolute';
+        const container = document.getElementById(`d-card${dealerNextCard}`);
+        const index = container.childElementCount;
+        img.style.transform = `translateY(-${10*(index-1)}%)`;
+    
+        if(container.firstElementChild.alt == "Back"){
+            container.firstElementChild.remove();
+            img.style.position = 'relative';
+            img.style.transform = 'translateY(10%)';
+        }
+    
+        container.appendChild(img);
+        dealerNextCard = 3 - dealerNextCard;
+        checkDealerValue();
     }
-
-    container.appendChild(img);
-    dealerNextCard = 3 - dealerNextCard;
 }
 
 
@@ -261,7 +359,8 @@ function checkForAces(user){
     }else if(user == 'player'){
         cards = document.querySelectorAll('.playerCards img');
     }
-    let totalAces = cards.filter(card => card.alt.includes('A')).length;
+    
+    let totalAces = [...cards].filter(card => card.alt.includes('A')).length;
     cards.forEach(card => {
         if(card.alt.includes('A')){
             if (aces < totalAces) {
@@ -271,4 +370,43 @@ function checkForAces(user){
         }
     });
     return false;
+}
+
+function resetGame(){
+    aces = 0;
+    dealerNextCard = 2;
+    nextCard = 1;
+    standing = false;
+    canStart = false;
+    playerValueEl.textContent = 0;
+    playerValueEl.style.display = 'none';
+    dealerValueEl.textContent = 0;
+    
+
+    let p_cardconts = document.querySelectorAll('.playerCards .cardcont');
+    p_cardconts.forEach(parent => {
+        while (parent.children.length > 1) {
+            parent.removeChild(parent.lastChild);
+        }
+        parent.firstElementChild.src = '/images/blackjack.png';
+        parent.firstElementChild.alt = 'Blackjack';
+    });
+
+    let d_cardconts = document.querySelectorAll('.dealerCards .cardcont');
+    d_cardconts.forEach(parent => {
+        while (parent.children.length > 1) {
+            parent.removeChild(parent.lastChild);
+        }
+
+        parent.firstElementChild.src = backImgPath;
+        parent.firstElementChild.alt = 'Back';
+    });
+
+    hideButtons();
+    
+    clearBet();
+    
+    document.querySelector('.chipBox').style.display = 'flex';
+
+    resultEl.style.display = 'none';
 }

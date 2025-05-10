@@ -172,3 +172,22 @@ body{
 }
 
 #playerValue{color: #fefefe; display: none;}
+
+#result{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    color: #fefefe;
+    background: #fefefe40;
+    border: 3px solid #ffcc00;
+    border-radius: 1rem;
+    box-shadow: 0 4px #aa0000, 0 0 15px rgba(255, 204, 0, 0.4);
+}
+
+#notification{
+    z-index: 2;
+}
