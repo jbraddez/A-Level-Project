@@ -159,7 +159,6 @@ function playerStart(){
     card2.src = imgPath + annotation2 + ".png";
     card2.alt = annotation2;
 
-    onFirstCards = true;
     if(parseInt(playerValueEl.textContent) >= 21){
         checkPlayerValue();
     }
@@ -312,11 +311,14 @@ function checkPlayerValue(){
     const value = parseInt(playerValueEl.textContent); 
     // if doubled down dealer must play - if not check the value to determine what to do
     if(doubled_down){
-        if(value <= 21){
-            dealerPlay();
-        }else{
-            compareScores();
+        if(value > 21){
+            //if greater than 21, check for aces, either way let dealer play after
+            if(checkForAces('player')){
+                const text = value - 10;
+                playerValueEl.textContent = text;
+            }
         }
+        dealerPlay();
     }else{
         if(value > 21){
             if(checkForAces('player')){
@@ -342,7 +344,6 @@ function checkPlayerValue(){
         }
     }
 }
-let onFirstCards = false;
 
 function checkDealerValue(){
     const value = parseInt(dealerValueEl.textContent); 
@@ -501,7 +502,6 @@ function resetGame(){
     playerValueEl.style.display = 'none';
     dealerValueEl.textContent = 0;
     dealerMustEnd = false;
-    onFirstCards = false;
     doubled_down = false;
     doubleDownEl.classList.remove('disabled');
 
