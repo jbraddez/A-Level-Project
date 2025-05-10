@@ -20,6 +20,9 @@ let tableMax = 10000;
 let tableMin = 0;
 let belowMinBet = false;
 
+let dealerAces = 0;
+let aces = 0;
+
 const chipRow1 = document.getElementById('chipRow1');
 const chipRow2 = document.getElementById('chipRow2');
 tableSelect.addEventListener('change',(event)=>{
@@ -149,10 +152,14 @@ function playerStart(){
     addValue(data1.value,'player');
     addValue(data2.value,'player');
 
-    card1.src = imgPath + getCardAnnotation(data1) + ".png";
-    card2.src = imgPath + getCardAnnotation(data2) + ".png";
+    const annotation1 = getCardAnnotation(data1);
+    const annotation2 = getCardAnnotation(data2);
+    card1.src = imgPath + annotation1 + ".png";
+    card1.alt = annotation1;
+    card2.src = imgPath + annotation2 + ".png";
+    card2.alt = annotation2;
 
-    if(parseInt(playerValueEl.textContent) == 21){
+    if(parseInt(playerValueEl.textContent) >= 21){
         checkPlayerValue();
     }
 
@@ -161,15 +168,18 @@ function playerStart(){
     }, 500);
 }
 
+const dealerCard1Cont = document.getElementById('d-card1');
 const dealerCard1 = document.querySelector('#d-card1 img');
 const dealerCard2 = document.querySelector('#d-card2 img');
 const dealerValueEl = document.getElementById('dealerValue');
 
 function dealerStart(){
     const data = getCard();
-    
+    const annotation = getCardAnnotation(data);
     addValue(data.value,'dealer');
-    dealerCard1.src = imgPath + getCardAnnotation(data) + '.png';
+    dealerCard1Cont.firstElementChild.src = imgPath + annotation + '.png';
+    console.log(imgPath + annotation);
+    dealerCard1Cont.firstElementChild.alt = annotation;
     dealerCard2.src = backImgPath;
 
     showButtons();
@@ -187,6 +197,11 @@ function addValue(value,user){
         value = 10;
     }else if(value == 'A'){
         value = 11; // NEED TO HANDLE - if bust then count aces in hand, - 10 for each ace until below 21 then hide that ace from deck to prevent never going bust 
+        if(user == 'dealer'){
+            dealerAces++;
+        }else if(user == 'player'){
+            aces++;
+        }
     }
 
     const newValue = currentValue+value;
@@ -271,12 +286,15 @@ function stand(){
     dealerPlay();
 }
 
+let dealerCheckCard2 = false;
+let dealerMustEnd = false;
 function checkPlayerValue(){
     const value = parseInt(playerValueEl.textContent); 
     if(value > 21){
         if(checkForAces('player')){
             const text = value - 10;
             playerValueEl.textContent = text;
+            showButtons();
         }else{
             //compare scores - end game func - player lose
             compareScores();
@@ -287,10 +305,10 @@ function checkPlayerValue(){
         //check dealer cards - if card2 back card get another, and check then end 
         if(document.querySelector('#d-card2 img').alt == "Back"){
             dealerPlay();
+            dealerCheckCard2 = true;
+        }else{
+            compareScores();
         }
-
-        //compare score - end game func
-        compareScores();
     }
 
     if(value < 21){
@@ -304,6 +322,7 @@ function checkDealerValue(){
         if(checkForAces('dealer')){
             const text = value - 10;
             dealerValueEl.textContent = text;
+            dealerPlay();
         }else{
             //bust - end game - dealer loses
         compareScores();
@@ -324,6 +343,7 @@ function checkDealerValue(){
 
 const resultEl = document.getElementById('result');
 function compareScores(){
+    hideButtons();
     const playerScore = parseInt(playerValueEl.textContent);
     const dealerScore = parseInt(dealerValueEl.textContent);
     console.log(bet);
@@ -337,34 +357,35 @@ function compareScores(){
 
     setTimeout(() => {
         resultEl.style.display = 'block';
-        //check player or dealer gone bust
+        //check player gone bust
         if(playerScore > 21){
             winnings = 0;
             resultEl.textContent = "You're Bust!";
             showNotification('Dealer Wins', 'You went bust, you won 0 chips.','red');
-        }else if(dealerScore > 21){
-            winnings = bet * 2;
-            resultEl.textContent = "Dealer's Bust!";
-            showNotification('You Win', `The dealer went bust, you won ${winnings} chips.`,'green');
         }else{
             if(playerScore == dealerScore){
-                winnings = 0;
+                winnings = bet;
                 resultEl.textContent = "You Tied!";
-                showNotification('No one wins', 'You tied with the dealer, you won 0 chips.','red');
-            }else{
+                showNotification('No one wins', `You tied with the dealer, you won ${winnings} chips back.`,'red');
+            }
+            else{
                 //check if player got blackjack
                 if(playerScore == 21 && checkBlackjack()){
                     winnings = bet * 2.5;
                     resultEl.textContent = "BlackJack!";
                     showNotification('You Win', `You got blackjack, you won ${winnings} chips.`,'green');
-                }//otherwise, dealer must've beat player
+                }else if(dealerScore > 21){//check if dealer bust
+                    winnings = bet * 2;
+                    resultEl.textContent = "Dealer's Bust!";
+                    showNotification('You Win', `The dealer went bust, you won ${winnings} chips.`,'green');
+                }
                 else{
                     //check player beat dealer if not dealer won
                     if(playerScore > dealerScore){
                         winnings = bet * 2;
                         resultEl.textContent = "You Win!";
                         showNotification('You Win', `You beat the dealer, you won ${winnings} chips.`,'green');
-                    }else{
+                    }else{//otherwise, dealer must've beat player
                         winnings = 0;
                         resultEl.textContent = "Dealer Wins!";
                         showNotification('Dealer Wins', `The dealer beat you, you won 0 chips.`,'red');
@@ -398,9 +419,12 @@ function checkBlackjack(){
 let dealerNextCard = 2;
 function dealerPlay(){
     const dealerScore = parseInt(dealerValueEl.textContent);
-    if(dealerScore >= 17){
+    if(dealerScore >= 17 || dealerMustEnd){
         compareScores();
     }else{
+        if(dealerCheckCard2){
+            dealerMustEnd = true;
+        }
         const data = getCard();
         addValue(data.value,'dealer');
         const annotation = getCardAnnotation(data);
@@ -426,28 +450,25 @@ function dealerPlay(){
 }
 
 
-let aces = 0;
+
 function checkForAces(user){
-    let cards;
+    console.log('checking aces for ', user)
     if(user == 'dealer'){
-        cards = document.querySelectorAll('.dealerCards img');
-    }else if(user == 'player'){
-        cards = document.querySelectorAll('.playerCards img');
-    }
-    
-    let totalAces = [...cards].filter(card => card.alt.includes('A')).length;
-    cards.forEach(card => {
-        if(card.alt.includes('A')){
-            if (aces < totalAces) {
-                aces++;
-                return true;
-            }
+        if(dealerAces > 0){
+            dealerAces--;
+            return true;
         }
-    });
+    }else if(user == 'player'){
+        if(aces > 0){
+            aces--;
+            return true;
+        }
+    }
     return false;
 }
 
 function resetGame(){
+    dealerAces = 0;
     aces = 0;
     dealerNextCard = 2;
     nextCard = 1;
@@ -456,7 +477,8 @@ function resetGame(){
     playerValueEl.textContent = 0;
     playerValueEl.style.display = 'none';
     dealerValueEl.textContent = 0;
-    
+    dealerMustEnd = false;
+    dealerCheckCard2 = false;
 
     let p_cardconts = document.querySelectorAll('.playerCards .cardcont');
     p_cardconts.forEach(parent => {
@@ -478,7 +500,6 @@ function resetGame(){
     });
 
     hideButtons();
-    
     clearBet();
     
     document.querySelector('.chipBox').style.display = 'flex';

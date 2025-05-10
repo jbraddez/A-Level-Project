@@ -42,6 +42,7 @@ function showChips(chips){
 function showNotification(title,text,colour){
     const notification = document.getElementById('notification')
     notification.innerHTML = `<h3>${title}</h3><p>${text}</p>`;
+    notification.classList.remove('green','red');
     notification.classList.add('showNoti');
     notification.classList.add(colour);
     setTimeout(() => {
