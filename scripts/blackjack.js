@@ -16,6 +16,7 @@ const startBtn = document.getElementById('start');
 const betsCont = document.getElementById('betsCont');
 const betAmountEl = document.getElementById('betAmount');
 const tableSelect = document.getElementById('table');
+const doubleDownEl = document.getElementById('doubleDown');
 let tableMax = 10000;
 let tableMin = 0;
 let belowMinBet = false;
@@ -139,7 +140,6 @@ function start(){
 
 const card1 = document.querySelector('#card1 img');
 const card2 = document.querySelector('#card2 img');
-
 function getCard(){
     const index = Math.floor(Math.random() * deck.length);
     return deck[index];;
@@ -158,6 +158,7 @@ function playerStart(){
     card1.alt = annotation1;
     card2.src = imgPath + annotation2 + ".png";
     card2.alt = annotation2;
+
 
     if(parseInt(playerValueEl.textContent) >= 21){
         checkPlayerValue();
@@ -182,7 +183,15 @@ function dealerStart(){
     dealerCard1Cont.firstElementChild.alt = annotation;
     dealerCard2.src = backImgPath;
 
+    doubleDownEl.style.display = 'block';
     showButtons();
+}
+let doubled_down = false
+function doubleDown(){
+    minusChips(bet);
+    bet*=2;
+    doubled_down = true;
+    hit();
 }
 
 const playerValueEl = document.getElementById('playerValue');
@@ -248,6 +257,7 @@ function hideButtons(){
     playerButtons.forEach(e => {
         e.style.display = 'none';
     });
+    doubleDownEl.style.display = 'none';
 }
 
 function showButtons(){
@@ -290,29 +300,32 @@ function stand(){
 let dealerMustEnd = false;
 function checkPlayerValue(){
     const value = parseInt(playerValueEl.textContent); 
-    if(value > 21){
-        if(checkForAces('player')){
-            const text = value - 10;
-            playerValueEl.textContent = text;
-            showButtons();
-        }else{
-            //compare scores - end game func - player lose
-            compareScores();
+    // if doubled down dealer must play - if not check the value to determine what to do
+    if(doubled_down){
+        dealerPlay();
+    }else{
+        if(value > 21){
+            if(checkForAces('player')){
+                const text = value - 10;
+                playerValueEl.textContent = text;
+                showButtons();
+            }else{
+                //compare scores - end game func - player lose
+                compareScores();
+            }
         }
-    }
-
-    if(value == 21){
-        //check dealer cards - if card2 back card get another, and check then end 
-        if(document.querySelector('#d-card2 img').alt == "Back"){
+    
+        if(value == 21){
+            //check dealer cards - if card2 back card get another, and check then end 
+            if(checkBlackjack()){
+                dealerMustEnd = true;
+            }
             dealerPlay();
-            dealerMustEnd = true;
-        }else{
-            compareScores();
         }
-    }
-
-    if(value < 21){
-        showButtons();
+    
+        if(value < 21){
+            showButtons();
+        }
     }
 }
 
@@ -475,6 +488,8 @@ function resetGame(){
     playerValueEl.style.display = 'none';
     dealerValueEl.textContent = 0;
     dealerMustEnd = false;
+    onFirstCards = false;
+    doubled_down = false;
 
     let p_cardconts = document.querySelectorAll('.playerCards .cardcont');
     p_cardconts.forEach(parent => {
