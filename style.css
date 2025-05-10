@@ -84,7 +84,7 @@
 }
 
 .chips-sec img{
-    filter: brightness(0) saturate(100%) invert(82%) sepia(20%) saturate(2316%) hue-rotate(354deg) brightness(103%) contrast(112%);
+    filter: brightness(0) saturate(100%) invert(82%) sepia(20%) saturate(2316%) hue-rotate(354deg) brightness(103%) contrast(112%) drop-shadow(0 0.2rem 0.3rem #00000099);
     height: 100%;
 }
 

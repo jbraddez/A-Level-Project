@@ -191,3 +191,49 @@ body{
 #notification{
     z-index: 2;
 }
+
+#table{
+    padding: 0.1rem;
+    border-radius: 0.5rem;
+    outline: 0;
+    background: #ffcc00;
+    cursor: pointer;
+    color: #111;
+    transition: 200ms ease-in-out;
+    border: 1px solid #000;
+}
+
+.oneB-table{
+    background-color: #0A0A23;
+    background-image: 
+        radial-gradient(circle, rgba(255, 255, 255, 0.05) 1%, transparent 20%),
+        radial-gradient(circle, rgba(0, 255, 255, 0.08) 1%, transparent 20%),
+        radial-gradient(circle, rgba(173, 216, 230, 0.1) 1%, transparent 20%),
+        radial-gradient(circle, rgba(255, 255, 255, 0.03) 1%, transparent 20%),
+        linear-gradient(to right, 
+        #FFD700 2px, transparent 2px, 
+        transparent calc(100% - 2px), #FFD700 calc(100% - 2px));
+    background-size: 15px 15px, 15px 15px, 15px 15px, 15px 15px, 100% 100%;
+    background-position: 0 0, 7.5px 7.5px, 0 0, 7.5px 7.5px, 0 0;
+    background-repeat: repeat;
+}
+
+.table-10k {
+    background-color: #0B6623;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1%, transparent 20%), radial-gradient(circle, rgba(0, 0, 0, 0.1) 1%, transparent 20%);
+}
+
+.table-50k {
+    background-color: #8B0000;
+    background-image: radial-gradient(circle, rgba(255, 100, 100, 0.15) 1%, transparent 20%), radial-gradient(circle, rgba(0, 0, 0, 0.15) 1%, transparent 20%);
+}
+
+.table-100k {
+    background-color: #1C1C3C;
+    background-image: radial-gradient(circle, rgba(173, 216, 230, 0.3) 1%, transparent 20%), radial-gradient(circle, rgba(0, 191, 255, 0.2) 1%, transparent 20%);
+}
+
+.table-250k {
+    background-color: #B8D4E3;
+    background-image: radial-gradient(circle, #7ea2f2c4 1%, transparent 20%), radial-gradient(circle, rgba(140, 160, 220, 0.6) 1%, transparent 20%);
+}

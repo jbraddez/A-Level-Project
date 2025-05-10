@@ -39,16 +39,23 @@
     </div>
 
     <div class="chipBox">
+        <select id="table">
+            <option data-min="0" selected value="10000">Casual Table</option>
+            <option data-min="5000" value="50000">High Limits</option>
+            <option data-min="10000" value="100000">Diamond Table</option>
+            <option data-min="500000" value="250000">Platinum Table</option>
+            <option data-min="1000000000" value="0">1 Billion Table</option>
+        </select>
         <div class="bet-btns">
             <button onclick="clearBet()" id="clearBet">Clear</button>
             <button onclick="start()" id="start" class="disabled">Start</button>
         </div>
-        <div class="row">
+        <div id="chipRow1" class="row">
             <button onclick="addBet(100)"><img src="/images/chips/100.png" alt="100"></button>
             <button onclick="addBet(250)"><img src="/images/chips/250.png" alt="250"></button>
             <button onclick="addBet(500)"><img src="/images/chips/500.png" alt="500"></button>
         </div>
-        <div class="row">
+        <div id="chipRow2" class="row">
             <button onclick="addBet(1000)"><img src="/images/chips/1000.png" alt="1000"></button>
             <button onclick="addBet(2500)"><img src="/images/chips/2500.png" alt="2500"></button>
             <button onclick="addBet(5000)"><img src="/images/chips/5000.png" alt="5000"></button>
