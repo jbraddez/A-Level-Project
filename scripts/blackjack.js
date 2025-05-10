@@ -287,7 +287,6 @@ function stand(){
     dealerPlay();
 }
 
-let dealerCheckCard2 = false;
 let dealerMustEnd = false;
 function checkPlayerValue(){
     const value = parseInt(playerValueEl.textContent); 
@@ -306,7 +305,7 @@ function checkPlayerValue(){
         //check dealer cards - if card2 back card get another, and check then end 
         if(document.querySelector('#d-card2 img').alt == "Back"){
             dealerPlay();
-            dealerCheckCard2 = true;
+            dealerMustEnd = true;
         }else{
             compareScores();
         }
@@ -423,9 +422,6 @@ function dealerPlay(){
     if(dealerScore >= 17 || dealerMustEnd){
         compareScores();
     }else{
-        if(dealerCheckCard2){
-            dealerMustEnd = true;
-        }
         const data = getCard();
         addValue(data.value,'dealer');
         const annotation = getCardAnnotation(data);
@@ -479,7 +475,6 @@ function resetGame(){
     playerValueEl.style.display = 'none';
     dealerValueEl.textContent = 0;
     dealerMustEnd = false;
-    dealerCheckCard2 = false;
 
     let p_cardconts = document.querySelectorAll('.playerCards .cardcont');
     p_cardconts.forEach(parent => {
