@@ -122,7 +122,7 @@ function checkScoreAndPayout(){
 
     setTimeout(() => {
         resetGame();
-    }, 1500);
+    }, 2500);
 }
 
 
