@@ -5,7 +5,9 @@ const odds = ['1/1','2/1','3/1','4/1','5/1','6/1','7/1','3/2','5/2','7/2','4/3',
 const resultsEl = document.getElementById('results');
 
 function selectHorse(e) {
-    horses.forEach(horse => horse.classList.remove('selected'));
+    horses.forEach((horse) => {
+        horse.classList.remove('selected');
+    });
     const horse = e.currentTarget;
     horse.classList.add('selected');
     selectedHorse = horse;
@@ -14,9 +16,12 @@ function selectHorse(e) {
 
 function resetGame(){
     results = [];
+    clearBet();
     selectedHorse = undefined;
     horses.forEach(horse => {
         horse.addEventListener('click', selectHorse);
+        horse.style.left = 0;
+        horse.querySelector('img').src = '/images/horseStatic.png';
     });
     getOdds();
     document.querySelector('.chipBox').style.display = 'flex';
@@ -28,7 +33,6 @@ function getOdds(){
    horses.forEach(horse =>{
     const oddEl = horse.querySelector('p.odd');
     const odd = odds[Math.floor(Math.random() * odds.length)];
-    const random2 = Math.floor(Math.random() * 4) || 1;
 
     horse.setAttribute('odd', odd);
     oddEl.textContent = odd;
@@ -74,7 +78,7 @@ function horsesMove(){
             const oddDecimal = getDecimalOdd(odd);
     
             const distance = parseInt(horse.style.left) || 0;
-            const distanceToAdd = Math.ceil(Math.random() * 4 / oddDecimal) +  (Math.random() * 2);
+            const distanceToAdd = Math.ceil(Math.random() * 4 / oddDecimal) +  Math.round((Math.random() * 2));
             horse.style.left = distance + distanceToAdd + '%'; 
             }
         });
@@ -98,7 +102,7 @@ function showResults(){
         const p = document.createElement('p');
         p.textContent = horseNumber;
         if(horse == selectedHorse){
-            p.classList.add('playersHorse')
+            p.classList.add('playersHorse');
         }
         resultsEl.appendChild(p);
     });
@@ -111,7 +115,7 @@ function checkScoreAndPayout(){
         const oddsDecimal = getDecimalOdd(selectedHorse.getAttribute('odd'));
         const winnings = Math.round(bet * oddsDecimal);
         addChips(winnings + bet);
-        showNotification('You Won',`Your horse won so you won ${winnings.toLocaleString()} chips!`,'green')
+        showNotification('You Won',`Your horse won so you won ${(winnings+bet).toLocaleString()} chips!`,'green')
     }else{
         showNotification('You Lost',`Your horse didnt win, you won nothing.`,'red')
     }
