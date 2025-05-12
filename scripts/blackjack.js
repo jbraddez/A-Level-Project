@@ -133,7 +133,7 @@ function start(){
     }
     playerValueEl.style.display = 'block';
     minusChips(bet);
-    document.querySelector('.chipBox').style.display = 'none';//need to have reset func incl. chipbox children when game ends
+    document.querySelector('.chipBox').style.display = 'none';
     dealerBox.style.display = 'flex';
     playerStart();
 }

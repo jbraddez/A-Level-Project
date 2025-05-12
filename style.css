@@ -9,7 +9,7 @@
 
 #notification{
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 95%;
     left: 50%;
@@ -20,6 +20,7 @@
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 0.5rem #00000099;
     border-left: 5px solid #5f9e76;
+    z-index: 10;
     background: linear-gradient(315deg,#a8a2a2, #efefef);
 }
 
@@ -92,4 +93,88 @@
     position: relative;
     top: 0.5rem;
     margin: 0.5rem;
+}
+
+
+.goldButton{
+    padding: 0.3rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    outline: 0;
+    background: #ffcc00;
+    cursor: pointer;
+    color: #111;
+    margin: 1rem 0;
+    transition: 200ms ease-in-out;
+    border: 1px solid #000;
+}
+
+.goldButton:hover{
+    padding: 0.3rem 0.5rem;
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+}
+
+#betsText{
+    color: #fefefe;
+}
+#betAmount{
+    color: #ffd700;
+}
+
+#betsCont{
+    margin: 0.5rem 0;
+    margin-bottom: 1rem;
+    width: 3rem;
+    height: 3rem;
+}
+
+#betsCont img{
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    filter: drop-shadow(0 0.3rem 0.3rem #00000059);
+}
+
+.chipBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.chipBox .row{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 3rem;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: fit-content;
+}
+
+.chipBox .row button{
+    all: unset;
+    height: 100%;
+    cursor: pointer;
+    aspect-ratio: 1;
+    transition: 200ms;
+}
+
+.chipBox .row button:hover,.chipBox .row button:focus{
+    scale: 1.05;
+    filter: drop-shadow(0 0.3rem 0.3rem #00000099);
+}
+
+.chipBox .row button img{
+    height: 100%;
+    width: 100%;
+}
+
+#table{
+    margin: 0;
+}
+
+.disabled{
+    background: #ab8902 !important;
+    color: #2a2a2a !important;
+    cursor: not-allowed !important;
 }

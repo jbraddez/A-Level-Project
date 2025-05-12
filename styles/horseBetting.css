@@ -1,0 +1,134 @@
+html{
+    background: hsl(0, 100%, 25%);
+}
+body{
+    min-height: 100vh;
+    background:
+    radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 9%, hsla(0, 100%, 20%, 0) 9%) 0 0,
+    radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 8%, hsla(0, 100%, 20%, 0) 10%) 50px 50px,
+    radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 50px 0,
+    radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 0 50px,
+    radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 50px 0,
+    radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 100px 50px,
+    radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 0 0,
+    radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 50px 50px,
+    linear-gradient(45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0,
+    linear-gradient(-45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0;
+    background-size: 100px 100px;
+    background-color: #300;
+}
+
+.screen{
+    position: relative;
+    margin: 3rem auto 0.5rem;
+    width: 95%;
+    max-width: 600px;
+    border: 0.2rem solid #111;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: linear-gradient(to top, #87ceeb, #d5e9f1);
+}
+
+.horse{
+    position: relative;
+    max-height: 5rem;
+    aspect-ratio: 3/2;
+}
+
+.horse img{
+    height: 100%;
+    width: 100%;
+    transform: scaleX(-1);
+    object-fit: contain;
+    filter: brightness(0.5);
+}
+
+.screen .row{
+    position: relative;
+}
+.screen .row::after{
+    content: '';
+    height: 30%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: #964b00;
+    background-size: contain;
+    background-image: url("/images/wood-pattern.png");
+    box-shadow: 0 -0.5rem 0.5rem #00000059;
+}
+
+.screen::after {
+    content: '';
+    width: 1rem;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-image: url('/images/checkeredflag.jpg');
+    background-size: 2rem;
+}
+
+
+.screen .row::before{
+    content: '';
+    height: 45%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-size:35%;
+    background-image: url("https://img.freepik.com/free-vector/seamless-green-grass-pattern_1284-52275.jpg");
+}
+
+.horse-number{
+    margin-bottom: -1lh;
+    text-align: center;
+    color: #fefefe;
+    text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+
+.horse:hover img,.horse.selected img{
+    scale: 1.05;
+    cursor: pointer;
+    filter: brightness(1);
+}
+
+.odd{
+    position: absolute;
+    padding: 0.5rem;
+    z-index: 3;
+    color: #fefefe;
+    background: #889ea8;
+    border-radius: 0.5rem;
+    font-family: 'Courier New', Courier, monospace;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-100%);
+    display: none;
+}
+
+#results{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    background: #00000099;
+    border-radius: 0.5rem;
+    position: fixed;
+    top: 50%;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 3;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+#results *{
+    color: #fefefe;
+}
+
+.playersHorse{
+    color: #ffcc00;
+}

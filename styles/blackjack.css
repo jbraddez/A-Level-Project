@@ -50,6 +50,7 @@ body{
 #betsCont{
     margin: 0.5rem 0;
     width: 3rem;
+    margin-bottom: 0;
     height: 3rem;
 }
 
@@ -135,12 +136,6 @@ body{
 #doubleDown:hover, .bet-btns button:hover{
     padding: 0.3rem 0.5rem;
     box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
-}
-
-.disabled{
-    background: #ab8902 !important;
-    color: #2a2a2a !important;
-    cursor: not-allowed !important;
 }
 
 .disabled:hover{
