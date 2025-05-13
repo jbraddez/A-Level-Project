@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horse Betting | Casino Project</title>
-    <link rel="stylesheet" href="/styles/horseBetting.css">
+    <title>3 Card Poker | Casino Project</title>
     <link rel="stylesheet" href="/style.css">
-    <meta name="theme-color" content="hsl(0, 100%, 25%)">
+    <link rel="stylesheet" href="/styles/3cardpoker.css">
+    <meta name="theme-color" content="#0B6623">
+    <link rel="icon" href="/images/chips/100.png">
+    <style>
+         #underConstruction {
+            background-image: repeating-linear-gradient(-75deg,yellow,yellow 10px,black 10px,black 20px);
+            color: #fff;
+            font-weight: 600;
+            font-size: 2rem;
+            padding: 10px;
+            text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+            text-align: center;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translateX(-50%) rotate(-10deg);
+            width: 200%;
+        }
+    </style>
 </head>
 <body>
-
     <header>
         <a href="/" class="homelink"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></a><!--home-->
 
@@ -23,56 +39,13 @@
     </header>
 
 
-    <div class="screen">
-        <div class="row1 row">
-            <div class="horse">
-                <div class="horse-number">1</div>
-                <p class="odd"></p>
-                <img src="/images/horseStatic.png" alt="Horse 1">
-            </div>
-        </div>
-        <div class="row2 row">
-            <div class="horse">
-                <div class="horse-number">2</div>
-                <p class="odd"></p>
-                <img src="/images/horseStatic.png" alt="Horse 2">
-            </div>
-        </div>
-        <div class="row3 row">
-            <div class="horse">
-                <div class="horse-number">3</div>
-                <p class="odd"></p>
-                <img src="/images/horseStatic.png" alt="Horse 3">
-            </div>
-        </div>
-        <div class="row4 row">
-            <div class="horse">
-                <div class="horse-number">4</div>
-                <p class="odd"></p>
-                <img src="/images/horseStatic.png" alt="Horse 4">
-            </div>
-        </div>
-        <div class="row5 row">
-            <div class="horse">
-                <div class="horse-number">5</div>
-                <p class="odd"></p>
-                <img src="/images/horseStatic.png" alt="Horse 5">
-            </div>
-        </div>
-        <div class="row6 row">
-            <div class="horse">
-                <div class="horse-number">6</div>
-                <p class="odd"></p>
-                <img src="/images/horseStatic.png" alt="Horse 6">
-            </div>
-        </div>
-    </div>
-
     <div class="chipBox">
         <select class="goldButton" id="table">
             <option data-min="0" selected value="10000">Casual Table</option>
-            <option value="100000">High Limits</option>
-            <option value="500000">Diamond Table</option>
+            <option data-min="5000" value="50000">High Limits</option>
+            <option data-min="10000" value="100000">Diamond Table</option>
+            <option data-min="500000" value="250000">Platinum Table</option>
+            <option data-min="1000000000" value="0">1 Billion Table</option>
         </select>
         <div class="bet-btns">
             <button class="goldButton" onclick="clearBet()" id="clearBet">Clear</button>
@@ -94,12 +67,11 @@
 
         </div>
     </div>
+    <h2 id="underConstruction">Under Construction</h2>
 
-    <div id="results">
-    </div>
 
+    <script src="/scripts/3cardpoker.js"></script>
     <script src="/scripts/script.js"></script>
     <script src="/scripts/chipBet.js"></script>
-    <script src="/scripts/horseBetting.js"></script>
 </body>
 </html>

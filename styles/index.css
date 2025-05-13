@@ -9,16 +9,16 @@ body{
 }
 main {
     position: absolute;
-    bottom: -50px;
     left: 50%;
-    transform: translateX(-50%);
+    bottom: 0;
+    transform: translate(-50%,50%);
     width: 100%;
     max-width: 600px;
     max-height: 45vh;
     display: flex;
     background: transparent;
     gap: 1rem;
-    padding: 0 2rem;
+    padding: 0 1rem;
 }
 
 main a {
@@ -37,7 +37,6 @@ main a:hover {
 main a img {
     width: 100%;
     height: auto;
-    border-radius: 0.5rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 

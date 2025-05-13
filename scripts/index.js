@@ -1,3 +1,4 @@
+/*
 const main = document.querySelector('main');
 const allGames = Array.from(main.children);
 let index = 0;
@@ -32,4 +33,5 @@ function cycleGames() {
 
 cycleGames();
 cycleinterval = setInterval(cycleGames, 3000);
+*/
 
