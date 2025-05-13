@@ -110,7 +110,6 @@ body{
 #results{
     display: flex;
     flex-direction: column;
-    margin: 1rem;
     background: #00000099;
     border-radius: 0.5rem;
     position: fixed;
