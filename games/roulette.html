@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roulette | Casino Project</title>
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/styles/3cardpoker.css"><!--roulette-->
+    <link rel="stylesheet" href="/styles/roulette.css"><!--roulette-->
     <meta name="theme-color" content="#0B6623">
     <link rel="icon" href="/images/chips/100.png">
     <style>
+         body{
+            overflow-x: hidden;
+        }
         #underConstruction {
             background-image: repeating-linear-gradient(-75deg,yellow,yellow 10px,black 10px,black 20px);
             color: #fff;
@@ -38,8 +41,12 @@
         </div>
     </header>
 
+    <div class="wheel">
+        <img src="/images/rouletteWheel.png" alt="Roulette Wheel">
+        <div class="ballCont"><div class="ball"></div></div>
+    </div>
 
-   <!--
+
     <div class="chipBox">
         <select class="goldButton" id="table">
             <option data-min="0" selected value="10000">Casual Table</option>
@@ -68,15 +75,13 @@
 
         </div>
     </div> 
-   -->
 
-   <h2 id="underConstruction">Under Construction</h2>
+    <h2 id="underConstruction">Under Construction</h2> 
 
+    <h3 id="result"></h3>
 
     <script src="/scripts/script.js"></script>
-    <!--
-    <script src="/scripts/roulette/wheel.js"></script>
+    <script src="/scripts/roulette.js"></script>
     <script src="/scripts/chipBet.js"></script>
-   -->
 </body>
 </html>
