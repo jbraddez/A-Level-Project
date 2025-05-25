@@ -316,9 +316,13 @@ function checkPlayerValue(){
             if(checkForAces('player')){
                 const text = value - 10;
                 playerValueEl.textContent = text;
+                dealerPlay();
+            }else{
+                compareScores();
             }
+        }else{
+            dealerPlay();
         }
-        dealerPlay();
     }else{
         if(value > 21){
             if(checkForAces('player')){

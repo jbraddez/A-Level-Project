@@ -21,6 +21,7 @@ function resetGame(){
     horses.forEach(horse => {
         horse.addEventListener('click', selectHorse);
         horse.style.left = 0;
+        horse.classList.remove('selected');
         horse.querySelector('img').src = '/images/horseStatic.png';
     });
     getOdds();
@@ -65,11 +66,15 @@ function getDecimalOdd(odd) {
     return num / den;
 }
 
-
+const remInPixels = parseFloat(getComputedStyle(document.documentElement).fontSize);
 function horsesMove(){
     horseUpdate = setInterval(() => {
+        const screenElWidth = document.querySelector('.screen').clientWidth;
+        const finishWidth = screenElWidth - (7 * remInPixels);
         horses.forEach(horse => {
-            if(parseInt(horse.style.left) > 95){
+            let leftPixels = (parseFloat(horse.style.left) / 100) * screenElWidth;
+            if(leftPixels >= finishWidth){
+                horse.querySelector('img').src = '/images/horseStatic.png';
                 if(results.indexOf(horse) == -1){
                     results.push(horse);
                 }
@@ -85,7 +90,6 @@ function horsesMove(){
 
         if(results.length == 6){
             clearInterval(horseUpdate);
-            //show results and pay back
             showResults();
         }
     }, 300);

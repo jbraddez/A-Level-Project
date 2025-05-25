@@ -41,47 +41,76 @@
         </div>
     </header>
 
-    <div class="wheel">
-        <img src="/images/rouletteWheel.png" alt="Roulette Wheel">
-        <div class="ballCont"><div class="ball"></div></div>
-    </div>
+    <main>
+        <div class="wheel">
+            <img src="/images/rouletteWheel.png" alt="Roulette Wheel">
+            <div class="ballCont"><div class="ball"></div></div>
+        </div>
+    
+        <div class="mat">
+            <div class="rowOf0s">
+                <div onclick="addBet(this)" class="zero numberEl">0</div>
+                <div onclick="addBet(this)" class="zero numberEl">00</div>
+            </div>
+            
+            <div class="mainGridWrapper">
+                <div id="numbersGrid"></div>
+        
+                <div class="bottomBets">
+                    <div onclick="addBet(this)" class="thirdBet">1st 12</div>
+                    <div onclick="addBet(this)" class="thirdBet">2nd 12</div>
+                    <div onclick="addBet(this)" class="thirdBet">3rd 12</div>
+                </div>
+        
+                <div class="outsideBets">
+                    <div onclick="addBet(this)" class="outsideBet">1–18</div>
+                    <div onclick="addBet(this)" class="outsideBet">Even</div>
+                    <div onclick="addBet(this)" class="outsideBet redBet">Red</div>
+                    <div onclick="addBet(this)" class="outsideBet blackBet">Black</div>
+                    <div onclick="addBet(this)" class="outsideBet">Odd</div>
+                    <div onclick="addBet(this)" class="outsideBet">19–36</div>
+                </div>
+            </div>
+        </div>
+    </main>
 
 
-    <div class="chipBox">
+    <div class="chipBox"><!--gonna have to make chip function for this-->
         <select class="goldButton" id="table">
             <option data-min="0" selected value="10000">Casual Table</option>
-            <option data-min="5000" value="50000">High Limits</option>
-            <option data-min="10000" value="100000">Diamond Table</option>
-            <option data-min="500000" value="250000">Platinum Table</option>
-            <option data-min="1000000000" value="0">1 Billion Table</option>
+            <option value="100000">High Limits</option>
+            <option value="500000">Diamond Table</option>
         </select>
         <div class="bet-btns">
             <button class="goldButton" onclick="clearBet()" id="clearBet">Clear</button>
             <button class="goldButton" onclick="start()" id="start" class="disabled">Start</button>
         </div>
         <div id="chipRow1" class="row">
-            <button onclick="addBet(100)"><img src="/images/chips/100.png" alt="100"></button>
-            <button onclick="addBet(250)"><img src="/images/chips/250.png" alt="250"></button>
-            <button onclick="addBet(500)"><img src="/images/chips/500.png" alt="500"></button>
+            <button onclick="grabChip(100)"><img src="/images/chips/100.png" alt="100"></button>
+            <button onclick="grabChip(250)"><img src="/images/chips/250.png" alt="250"></button>
+            <button onclick="grabChip(500)"><img src="/images/chips/500.png" alt="500"></button>
         </div>
         <div id="chipRow2" class="row">
-            <button onclick="addBet(1000)"><img src="/images/chips/1000.png" alt="1000"></button>
-            <button onclick="addBet(2500)"><img src="/images/chips/2500.png" alt="2500"></button>
-            <button onclick="addBet(5000)"><img src="/images/chips/5000.png" alt="5000"></button>
+            <button onclick="grabChip(1000)"><img src="/images/chips/1000.png" alt="1000"></button>
+            <button onclick="grabChip(2500)"><img src="/images/chips/2500.png" alt="2500"></button>
+            <button onclick="grabChip(5000)"><img src="/images/chips/5000.png" alt="5000"></button>
         </div>
         <p id="betsText">Place your bets</p>
         <p id="betAmount"></p>
         <div id="betsCont">
 
         </div>
-    </div> 
+    </div>
 
+    <img src="" alt="" class="cursorImg">
+    <!--
     <h2 id="underConstruction">Under Construction</h2> 
+    -->
 
     <h3 id="result"></h3>
 
     <script src="/scripts/script.js"></script>
-    <script src="/scripts/roulette.js"></script>
-    <script src="/scripts/chipBet.js"></script>
+    <script src="/scripts/roulette/chipBet.js"></script>
+    <script src="/scripts/roulette/roulette.js"></script>
 </body>
 </html>
