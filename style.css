@@ -84,7 +84,7 @@
 }
 
 #chips{
-    transform: translateY(-8.5%);
+    transform: translateY(-5%);
     font-size: 1.5rem;
     font-family: "Tagesschrift", system-ui;
     text-shadow: 0 0.2rem 0.3rem #00000099;
