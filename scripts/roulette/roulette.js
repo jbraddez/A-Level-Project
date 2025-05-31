@@ -13,6 +13,11 @@ const resultEl = document.getElementById('result');
 let spinning = false;
 
 function start(){
+    if(spinning){
+        showNotification('Please Wait','The current round has not finished, please be patient', 'red');
+        return
+    }
+
     minusChips(bet);
     spin();
 }

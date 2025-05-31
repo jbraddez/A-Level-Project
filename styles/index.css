@@ -50,5 +50,31 @@ main a img {
 }
 
 #freeChips{
+    margin: 0 0.5rem;
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    display: none;
+}
+
+.profile{
+    position: fixed;
     margin: 0.5rem;
+    background: #eee;
+    border: 1px solid #111;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0.2rem;
+    transition: 200ms;
+}
+
+.profile:hover{
+    scale: 1.05;
+}
+
+.profile svg{
+    fill: #000;
 }

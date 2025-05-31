@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Casino Project</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styles/profile.css">
+    <link rel="apple-touch-icon" type="image/png" href="/images/appicon.png">
+    <link rel="manifest" href="/json/manifest.json">
+    <meta name="theme-color" content="#1e0704">
+    <link rel="icon" href="/images/chips/100.png">
+</head>
+<body>
+    <a href="/" class="homelink"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></a><!--home-->
+
+    <div id="notification"></div>
+
+    <main>
+        <div id="profileIconCont"><img id="profileIcon" src="/images/emptyAvatar.webp" alt="Profile Picture"></div>
+        <h3 id="name"></h3>
+        <div id="nameForm" class="hidden">
+            <input id="nameInput" type="text" placeholder="First Name">
+            <button id="enterName" onclick="submitName()">Enter</button>
+        </div>
+
+        <div class="chips-sec">
+            <p id="chips">0</p>
+            <img src="/images/chip.svg" alt="Chips">
+        </div>
+
+        <div class="stats">
+            <h2>Stats</h2>
+            <div class="row">
+                <p>First Time Playing</p>
+                <p id="firstTimePlaying">N/A</p>
+            </div>
+            <div class="row">
+                <p>Total Chips Earned</p>
+                <p id="totalEarned">0</p>
+            </div>
+        </div>
+    </main>
+
+   
+    <script src="/scripts/profile.js"></script>
+    <script src="/scripts/script.js"></script>
+</body>
+</html>

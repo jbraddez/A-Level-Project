@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+html{
+    background: hsl(0, 100%, 25%);
+}
+body{
+    min-height: 100dvh;
+
+    background:
+    radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 9%, hsla(0, 100%, 20%, 0) 9%) 0 0,
+    radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 8%, hsla(0, 100%, 20%, 0) 10%) 50px 50px,
+    radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 50px 0,
+    radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 0 50px,
+    radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 50px 0,
+    radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 100px 50px,
+    radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 0 0,
+    radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 50px 50px,
+    linear-gradient(45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0,
+    linear-gradient(-45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0;
+    background-size: 100px 100px;
+    background-color: #300;
+    display: flex;
+}
+*{
+    font-family: "Montserrat", sans-serif;
+}
+
+main{
+    color: #eee;
+    backdrop-filter: blur(5px);
+    background: #000;
+    border-top: 0;
+    border-bottom: 0;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 3rem rgb(62, 0, 0);
+}
+
+#profileIconCont{
+    aspect-ratio: 1 !important;
+    margin: 2rem 0 1rem;
+    width: 40%;
+    max-width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+#profileIcon{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#nameForm{
+    display: none;
+}
+
+#nameInput,#enterName{
+    border-radius: 2px;
+    border: 1px solid #1119;
+    padding: 2px;
+    color: #000;
+}
+
+#enterName{
+    background: #ddd;
+    cursor: pointer;
+}
+
+#enterName:hover{
+    background: #ddd8;
+}
+
+.chips-sec{
+    position: relative;
+}
+
+#chips{
+    text-shadow: none;
+}
+
+.chips-sec img{
+    filter: brightness(0) saturate(100%) invert(82%) sepia(20%) saturate(2316%) hue-rotate(354deg) brightness(103%) contrast(112%);
+}
+
+.stats{
+    width: 90%;
+}
+
+.row{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #eee;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+}
+
+.homelink{
+    position: fixed;
+    z-index: 10;
+}
