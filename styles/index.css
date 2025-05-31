@@ -48,3 +48,7 @@ main a img {
     margin: 0 auto;
     text-align: center;
 }
+
+#freeChips{
+    margin: 0.5rem;
+}

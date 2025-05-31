@@ -50,5 +50,30 @@ function showNotification(title,text,colour){
     }, 3000);
 }
 
+function dailyChips(){
+    const date = new Date().toLocaleDateString();
+    const dateInStorage = localStorage.getItem('lastDateActive');
+    if(dateInStorage != date){
+        localStorage.setItem('lastDateActive', date);
+        showNotification('Free Daily Chips', "Here's your free 100 chips for today!", 'green');
+        addChips(100)
+    }
+}
+
 getChips();
 showChips(getChips());
+
+dailyChips();
+
+function shareForChips(){
+    if (navigator.share) {
+        navigator.share({
+          title: 'CASINO',
+          text: 'Play this fun casino game that costs no money!',
+          url: 'https://alevel-casino.vercel.app'
+        }).then(() => {
+          addChips(500);
+          showNotification('Thank You!',"Here's 500 chips for sharing!",'green');
+        })
+      }
+}
