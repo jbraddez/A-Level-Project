@@ -26,8 +26,7 @@ body{
 
 main{
     color: #eee;
-    backdrop-filter: blur(5px);
-    background: #000;
+    backdrop-filter: blur(10px);
     border-top: 0;
     border-bottom: 0;
     width: 100%;
@@ -93,14 +92,17 @@ main{
     width: 90%;
 }
 
+.stats h2{
+    margin-bottom: 0.7rem;
+}
+
 .row{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid #eee;
-    margin: 0.5rem 0;
-    padding: 0.5rem;
+    padding: 0.7rem;
 }
 
 .homelink{

@@ -1,4 +1,4 @@
-const baseUrl = `https://api.dicebear.com/9.x/notionists/svg?seed=`;
+const baseUrl = `https://api.dicebear.com/9.x/notionists/svg?`;
 const username = localStorage.getItem('name');
 const nameForm = document.getElementById('nameForm');
 
@@ -18,8 +18,11 @@ function showNameAndAvatar(name){
     const nameEl = document.getElementById('name');
     nameEl.textContent = name;
 
+    const gestures = ['hand','handPhone','ok','okLongArm','point','pointLongArm','waveLongArm','waveLongArms','waveOkLongArms','wavePointLongArms'];
+    const gesture = Math.random() < 0.5 ? `&gesture=${gestures[Math.floor(Math.random() * gestures.length)]}&gestureProbability=100` : '';
+
     const avatar = document.getElementById('profileIcon');
-    avatar.src = baseUrl + name;
+    avatar.src = `https://api.dicebear.com/9.x/notionists/svg?seed=${name}${gesture}`;
 }
 
 if(!username){
@@ -37,3 +40,4 @@ function showStats(){
 }
 
 showStats();
+
