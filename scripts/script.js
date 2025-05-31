@@ -39,13 +39,14 @@ function showChips(chips){
     chipsEl.textContent = chips;
 }
 
+let notiTimeout = null;
 function showNotification(title,text,colour){
+    clearTimeout(notiTimeout);
     const notification = document.getElementById('notification')
     notification.innerHTML = `<h3>${title}</h3><p>${text}</p>`;
     notification.classList.remove('green','red');
-    notification.classList.add('showNoti');
-    notification.classList.add(colour);
-    setTimeout(() => {
+    notification.classList.add('showNoti', colour);
+    notiTimeout = setTimeout(() => {
         notification.classList.remove('showNoti');
     }, 3000);
 }
@@ -66,6 +67,17 @@ showChips(getChips());
 dailyChips();
 
 function shareForChips(){
+    const lastShared = localStorage.getItem('lastShared');
+    const now = Date.now();
+    const hourIn_ms = 60 * 60 * 1000;
+
+    //check theyve shared before and if so calculate how long 
+    if (lastShared && now - parseInt(lastShared) < hourIn_ms) {
+        const minutesLeft = Math.ceil((hourIn_ms - (now - parseInt(lastShared))) / 60000);
+        showNotification("Please wait", `You can share again in ${minutesLeft} minute(s).`, 'orange');
+        return;
+    }
+
     if (navigator.share) {
         navigator.share({
           title: 'CASINO',
@@ -74,6 +86,7 @@ function shareForChips(){
         }).then(() => {
           addChips(500);
           showNotification('Thank You!',"Here's 500 chips for sharing!",'green');
+          localStorage.setItem('lastShared', now.toString());
         })
       }
 }
