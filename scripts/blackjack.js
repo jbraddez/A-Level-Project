@@ -136,6 +136,10 @@ function start(){
     document.querySelector('.chipBox').style.display = 'none';
     dealerBox.style.display = 'flex';
     playerStart();
+
+    //add to blackjack games stat
+    let currentGames = localStorage.getItem('blackJackGames') || 0;
+    localStorage.setItem('blackJackGames',++currentGames);
 }
 
 const card1 = document.querySelector('#card1 img');
@@ -406,6 +410,9 @@ function compareScores(){
                     winnings = bet * 2.5;
                     resultEl.textContent = "BlackJack!";
                     showNotification('You Win', `You got blackjack, you won ${winnings} chips.`,'green');
+                    //increment blackjack stat
+                    let blackJacks = localStorage.getItem('blackJacks') || 0;
+                    localStorage.setItem('blackJacks',++blackJacks);
                 }else if(dealerScore > 21){//check if dealer bust
                     winnings = bet * 2;
                     resultEl.textContent = "Dealer's Bust!";
@@ -442,8 +449,6 @@ function checkBlackjack(){
         return false;
     }else if(cards.length == 2){
         return true;
-    }else{
-        console.log('Player cards has less than 2 items.')
     }
 }
 

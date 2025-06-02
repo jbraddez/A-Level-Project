@@ -79,6 +79,10 @@ function hit() {
         betBtn.classList.remove('disabled');
     }
 
+    //increment spins of slots stat
+    let spinsOfSlots = localStorage.getItem('spinsOfSlots') || 0;
+    localStorage.setItem('spinsOfSlots',++spinsOfSlots)
+
     const reels = document.querySelectorAll('.reel img');
     reels.forEach((img, index) => {
         const duration = 1200 + index * 600; 

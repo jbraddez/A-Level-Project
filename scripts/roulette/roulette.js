@@ -20,6 +20,10 @@ function start(){
 
     minusChips(bet);
     spin();
+
+    //increment rounds of roulette stat
+    let roundsOfRoulette = localStorage.getItem('roundsOfRoulette') || 0;
+    localStorage.setItem('roundsOfRoulette', ++roundsOfRoulette);
 }
 
 function spin(){

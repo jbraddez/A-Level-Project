@@ -37,6 +37,18 @@ function showStats(){
 
     const totalEarnedEl = document.getElementById('totalEarned');
     totalEarnedEl.textContent = localStorage.getItem('totalEarned') || 0;
+
+    const blackJackGamesEl = document.getElementById('blackJackGames');
+    blackJackGamesEl.textContent = localStorage.getItem('blackJackGames') || 0;
+
+    const spinsOfSlotsEl = document.getElementById('spinsOfSlots');
+    spinsOfSlotsEl.textContent = localStorage.getItem('spinsOfSlots') || 0;
+
+    const roundsOfRouletteEl = document.getElementById('roundsOfRoulette');
+    roundsOfRouletteEl.textContent = localStorage.getItem('roundsOfRoulette') || 0;
+
+    const blackJacksEl = document.getElementById('blackJacks');
+    blackJacksEl.textContent = localStorage.getItem('blackJacks') || 0;
 }
 
 showStats();
