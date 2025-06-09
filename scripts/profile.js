@@ -49,6 +49,10 @@ function showStats(){
 
     const blackJacksEl = document.getElementById('blackJacks');
     blackJacksEl.textContent = localStorage.getItem('blackJacks') || 0;
+
+    const betsOnHorsesEl = document.getElementById('betsOnHorses');
+    betsOnHorsesEl.textContent = localStorage.getItem('betsOnHorses') || 0;
+
 }
 
 showStats();

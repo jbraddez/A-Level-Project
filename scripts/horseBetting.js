@@ -52,6 +52,9 @@ function start(){
     minusChips(bet);
     document.querySelector('.chipBox').style.display = 'none';
 
+    let betsOnHorses = localStorage.getItem('betsOnHorses') || 0;
+    localStorage.setItem('betsOnHorses', ++betsOnHorses);
+
     horses.forEach(horse=>{
         horse.removeEventListener('click', selectHorse);
         horse.querySelector('img').src = '/images/horse.webp';
