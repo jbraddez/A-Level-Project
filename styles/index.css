@@ -17,7 +17,6 @@ main {
     max-height: 45vh;
     display: flex;
     background: transparent;
-    gap: 0.5rem;
     padding: 0 1rem;
 }
 
