@@ -73,10 +73,7 @@ if(!localStorage.getItem('firstTimePlaying')){
 }
 
 function addToTotalEarned(toAdd){
-    let total = localStorage.getItem('totalEarned');
-    if(!total){
-        total = localStorage.getItem('chips');
-    }
+    let total = localStorage.getItem('totalEarned') || 0;
     total = parseInt(total);
     total += toAdd;
     localStorage.setItem('totalEarned', total);
