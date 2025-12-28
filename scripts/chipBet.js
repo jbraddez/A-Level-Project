@@ -15,29 +15,25 @@ tableSelect.addEventListener('change',(event)=>{
     tableMin = parseInt(selectedOption.getAttribute('data-min'));
 
     if(tableMax == 10000){
-        chipRow1.innerHTML=`<button onclick="addBet(100)"><img src="/images/chips/100.png" alt="100"></button>
-            <button onclick="addBet(250)"><img src="/images/chips/250.png" alt="250"></button>
-            <button onclick="addBet(500)"><img src="/images/chips/500.png" alt="500"></button>`;
-        chipRow2.innerHTML=`<button onclick="addBet(1000)"><img src="/images/chips/1000.png" alt="1000"></button>
-            <button onclick="addBet(2500)"><img src="/images/chips/2500.png" alt="2500"></button>
-            <button onclick="addBet(5000)"><img src="/images/chips/5000.png" alt="5000"></button>`;
-    }else if(tableMax == 100000){
-        chipRow1.innerHTML=`<button onclick="addBet(1000)"><img src="/images/chips/1000.png" alt="1000"></button>
-            <button onclick="addBet(2500)"><img src="/images/chips/2500.png" alt="2500"></button>
-            <button onclick="addBet(5000)"><img src="/images/chips/5000.png" alt="5000"></button>`;
-        chipRow2.innerHTML=`<button onclick="addBet(10000)"><img src="/images/chips/10000.png" alt="10000"></button>
-            <button onclick="addBet(20000)"><img src="/images/chips/20000.png" alt="20000"></button>
-            <button onclick="addBet(50000)"><img src="/images/chips/50000.png" alt="50000"></button>`;
-
-    }else if(tableMax == 500000){
-        chipRow1.innerHTML=`<button onclick="addBet(10000)"><img src="/images/chips/10000.png" alt="10000"></button>
-            <button onclick="addBet(20000)"><img src="/images/chips/20000.png" alt="20000"></button>
-            <button onclick="addBet(50000)"><img src="/images/chips/50000.png" alt="50000"></button>`;
-        chipRow2.innerHTML=`<button onclick="addBet(75000)"><img src="/images/chips/75000.png" alt="75000"></button>
-            <button onclick="addBet(100000)"><img src="/images/chips/100000.png" alt="100000"></button>
-            <button onclick="addBet(200000)"><img src="/images/chips/200000.png" alt="200000"></button>`;
+        setChips([100, 250, 500], [1000, 2500, 5000]);
+    } else if(tableMax == 100000){
+        setChips([1000, 2500, 5000], [10000, 20000, 50000]);
+    } else if(tableMax == 500000){
+        setChips([10000, 20000, 50000], [75000, 100000, 200000]);
     }
+
 })
+
+function setChips(chipValues1, chipValues2) {
+    chipRow1.innerHTML = chipValues1.map(val => 
+        `<button onclick="addBet(${val})"><img src="/images/chips/${val}.png" alt="${val}"></button>`
+    ).join('');
+    
+    chipRow2.innerHTML = chipValues2.map(val => 
+        `<button onclick="addBet(${val})"><img src="/images/chips/${val}.png" alt="${val}"></button>`
+    ).join('');
+}
+
 
 window.addEventListener('pageshow', () => {
     tableSelect.dispatchEvent(new Event('change'));

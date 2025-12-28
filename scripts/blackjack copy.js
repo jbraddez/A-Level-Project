@@ -3,29 +3,12 @@ const imgPath = "https://deckofcardsapi.com/static/img/"; //.png
 const backImgPath = "https://deckofcardsapi.com/static/img/back.png";
 
 //fetch deck data
-const fullDeck = [];
-let deck = [];
+const deck = [];
 fetch('/json/deck_of_cards.json').then(response => response.json()).then(data => {
-    fullDeck.push(...data);
-    //puts full deck into current deck and shuffles
-    resetDeck();
+    deck.push(...data);
 }).catch(error => {
     console.error(error);
 });
-
-//make current deck from full deck and shuffle
-function resetDeck(){
-    deck = [...fullDeck];
-    shuffle();
-}
-
-//fisher yates algorithm
-function shuffle(){
-	for (let i = deck.length - 1; i > 0; i--){
-		let j = Math.floor(Math.random() * (i + 1));
-		[deck[i], deck[j]] = [deck[j],deck[i]]
-	}
-}
 
 let bet = 0;
 let canStart = false;
@@ -47,38 +30,57 @@ tableSelect.addEventListener('change',(event)=>{
     resetGame();
     tableMax = parseInt(event.target.value);
     const selectedOption = document.querySelector(`#table option[value="${tableMax}"]`);
-    //get table min to check when starting
     tableMin = parseInt(selectedOption.getAttribute('data-min'));
     document.body.classList.remove('table-10k', 'table-50k', 'table-100k', 'table-250k', 'oneB-table');
 
-    //change table and chips depending on table type
-    if (tableMax == 10000) {
-        setChips([100, 250, 500], [1000, 2500, 5000]);
+    if(tableMax == 10000){
+        chipRow1.innerHTML=`<button onclick="addBet(100)"><img src="/images/chips/100.png" alt="100"></button>
+            <button onclick="addBet(250)"><img src="/images/chips/250.png" alt="250"></button>
+            <button onclick="addBet(500)"><img src="/images/chips/500.png" alt="500"></button>`;
+        chipRow2.innerHTML=`<button onclick="addBet(1000)"><img src="/images/chips/1000.png" alt="1000"></button>
+            <button onclick="addBet(2500)"><img src="/images/chips/2500.png" alt="2500"></button>
+            <button onclick="addBet(5000)"><img src="/images/chips/5000.png" alt="5000"></button>`;
+        //add bg style
         document.body.classList.add('table-10k');
-    } else if (tableMax == 50000) {
-        setChips([1000, 2500, 5000], [10000, 20000, 50000]);
+    }else if(tableMax == 50000){
+        chipRow1.innerHTML=`<button onclick="addBet(1000)"><img src="/images/chips/1000.png" alt="1000"></button>
+            <button onclick="addBet(2500)"><img src="/images/chips/2500.png" alt="2500"></button>
+            <button onclick="addBet(5000)"><img src="/images/chips/5000.png" alt="5000"></button>`;
+        chipRow2.innerHTML=`<button onclick="addBet(10000)"><img src="/images/chips/10000.png" alt="10000"></button>
+            <button onclick="addBet(20000)"><img src="/images/chips/20000.png" alt="20000"></button>
+            <button onclick="addBet(50000)"><img src="/images/chips/50000.png" alt="50000"></button>`;
+        //add bg style
         document.body.classList.add('table-50k');
-    } else if (tableMax == 100000) {
-        setChips([1000, 2500, 5000], [10000, 20000, 50000]);
+
+    }else if(tableMax == 100000){
+        chipRow1.innerHTML=`<button onclick="addBet(1000)"><img src="/images/chips/1000.png" alt="1000"></button>
+            <button onclick="addBet(2500)"><img src="/images/chips/2500.png" alt="2500"></button>
+            <button onclick="addBet(5000)"><img src="/images/chips/5000.png" alt="5000"></button>`;
+        chipRow2.innerHTML=`<button onclick="addBet(10000)"><img src="/images/chips/10000.png" alt="10000"></button>
+            <button onclick="addBet(20000)"><img src="/images/chips/20000.png" alt="20000"></button>
+            <button onclick="addBet(50000)"><img src="/images/chips/50000.png" alt="50000"></button>`;
+        //add bg style
         document.body.classList.add('table-100k');
-    } else if (tableMax == 250000) {
-        setChips([10000, 20000, 50000], [75000, 100000, 200000]);
+
+    }else if(tableMax == 250000){
+        chipRow1.innerHTML=`<button onclick="addBet(10000)"><img src="/images/chips/10000.png" alt="10000"></button>
+            <button onclick="addBet(20000)"><img src="/images/chips/20000.png" alt="20000"></button>
+            <button onclick="addBet(50000)"><img src="/images/chips/50000.png" alt="50000"></button>`;
+        chipRow2.innerHTML=`<button onclick="addBet(75000)"><img src="/images/chips/75000.png" alt="75000"></button>
+            <button onclick="addBet(100000)"><img src="/images/chips/100000.png" alt="100000"></button>
+            <button onclick="addBet(200000)"><img src="/images/chips/200000.png" alt="200000"></button>`;
+        //add bg style
         document.body.classList.add('table-250k');
-    } else if (tableMax == 0) {
-        setChips([1000000000], []);
+    }
+    //1 billion only table
+    if(tableMax == 0){
+        chipRow1.innerHTML=`<button onclick="addBet(1000000000)"><img src="/images/chips/1000000000.png" alt="1000000000"></button>`;
         chipRow2.style.display = 'none';
         document.body.classList.add('oneB-table');
-        return;
+    }else{
+        chipRow2.style.display = 'flex';
     }
-
-    chipRow2.style.display = 'flex';
-
 })
-
-function setChips(row1, row2) {
-    chipRow1.innerHTML = row1.map(val => `<button onclick="addBet(${val})"><img src="/images/chips/${val}.png" alt="${val}"></button>`).join('');
-    chipRow2.innerHTML = row2.map(val => `<button onclick="addBet(${val})"><img src="/images/chips/${val}.png" alt="${val}"></button>`).join('');
-}
 
 //dispath event for selected state due to content not changing when history back to this page
 window.addEventListener('pageshow', () => {
@@ -142,12 +144,14 @@ function start(){
 
 const card1 = document.querySelector('#card1 img');
 const card2 = document.querySelector('#card2 img');
+function getCard(){
+    const index = Math.floor(Math.random() * deck.length);
+    return deck[index];;
+}
 
 function playerStart(){
-    const data1 = deck[0];
-    deck.splice(0, 1);
-    const data2 = deck[0];
-    deck.splice(0, 1);
+    const data1 = getCard();
+    const data2 = getCard();
 
     addValue(data1.value,'player');
     addValue(data2.value,'player');
@@ -174,8 +178,7 @@ const dealerCard2 = document.querySelector('#d-card2 img');
 const dealerValueEl = document.getElementById('dealerValue');
 
 function dealerStart(){
-    const data = deck[0];
-    deck.splice(0, 1);
+    const data = getCard();
     const annotation = getCardAnnotation(data);
     addValue(data.value,'dealer');
     dealerCard1Cont.firstElementChild.src = imgPath + annotation + '.png';
@@ -188,9 +191,9 @@ function dealerStart(){
         doubleDownEl.style.display = 'block';
         showButtons();
     }
+    
+    
 }
-
-
 let doubled_down = false
 function doubleDown(){
     if(bet > getChips()){
@@ -260,48 +263,6 @@ function getCardAnnotation(data){
     return value+ann_suit;
 }
 
-//draw card based on dealer or player function
-function drawCard(user){
-    const data = deck[0];
-    deck.splice(0, 1);
-    addValue(data.value, user); // update score
-
-    const annotation = getCardAnnotation(data);
-    const img = document.createElement('img');
-    img.src = imgPath + annotation + ".png";
-    img.alt = annotation;
-
-    let container, translateVal;
-
-    if(user === 'player'){
-        container = document.getElementById(`card${nextCard}`);
-        const index = container.childElementCount;
-        translateVal = -(9*(10-index)) -(100*(index-1));
-        img.style.transform = `translateY(${translateVal}%)`;
-        nextCard = 3 - nextCard;
-    } else if(user === 'dealer'){
-        container = document.getElementById(`d-card${dealerNextCard}`);
-        const index = container.childElementCount;
-        img.style.position = 'absolute';
-        img.style.transform = `translateY(-${10*(index-1)}%)`;
-
-        if(container.firstElementChild.alt === "Back"){
-            container.firstElementChild.remove();
-            img.style.position = 'relative';
-            img.style.transform = 'translateY(10%)';
-        }
-
-        dealerNextCard = 3 - dealerNextCard;
-    }
-
-    container.appendChild(img);
-
-    if(user === 'player'){
-        setTimeout(() => { checkPlayerValue(); }, 500);
-    } else if(user === 'dealer'){
-        setTimeout(() => { checkDealerValue(); }, 500);
-    }
-}
 
 //buttons
 const playerButtons = document.querySelectorAll('.player-btns');
@@ -320,8 +281,26 @@ function showButtons(){
 
 let nextCard = 1;
 function hit(){
+    const data = getCard();
     hideButtons();
-    drawCard('player');
+
+    addValue(data.value,'player');
+    const annotation = getCardAnnotation(data);
+    const img = document.createElement('img');
+    img.src = imgPath + annotation + ".png";
+    img.alt = annotation;
+    const container = document.getElementById(`card${nextCard}`);
+    const index = container.childElementCount;
+    const translateVal = -(9*(10-index)) -(100*(index-1));
+    img.style.transform = `translateY(${translateVal}%)`;
+
+    container.appendChild(img);
+    nextCard = 3 - nextCard;
+
+
+    setTimeout(() => {
+        checkPlayerValue();
+    }, 500);
 }
 
 let standing = false;
@@ -380,9 +359,7 @@ function checkDealerValue(){
         if(checkForAces('dealer')){
             const text = value - 10;
             dealerValueEl.textContent = text;
-            setTimeout(() => {
-                dealerPlay();
-            }, 1000);
+            dealerPlay();
         }else{
             //bust - end game - dealer loses
         compareScores();
@@ -482,7 +459,27 @@ function dealerPlay(){
     if(dealerScore >= 17 || dealerMustEnd){
         compareScores();
     }else{
-        drawCard('dealer');
+        const data = getCard();
+        addValue(data.value,'dealer');
+        const annotation = getCardAnnotation(data);
+    
+        const img = document.createElement('img');
+        img.src = imgPath + annotation + ".png";
+        img.alt = annotation;
+        img.style.position = 'absolute';
+        const container = document.getElementById(`d-card${dealerNextCard}`);
+        const index = container.childElementCount;
+        img.style.transform = `translateY(-${10*(index-1)}%)`;
+    
+        if(container.firstElementChild.alt == "Back"){
+            container.firstElementChild.remove();
+            img.style.position = 'relative';
+            img.style.transform = 'translateY(10%)';
+        }
+    
+        container.appendChild(img);
+        dealerNextCard = 3 - dealerNextCard;
+        checkDealerValue();
     }
 }
 
@@ -538,9 +535,6 @@ function resetGame(){
 
     hideButtons();
     clearBet();
-    if(deck.length < 15){
-        resetDeck();
-    }
     
     document.querySelector('.chipBox').style.display = 'flex';
 
