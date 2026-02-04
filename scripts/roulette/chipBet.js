@@ -12,7 +12,7 @@ let heldChip;
 let placedBets =[];
 
 tableSelect.addEventListener('change',(event)=>{
-    resetBets();
+    clearBet();
     tableMax = parseInt(event.target.value);
     const selectedOption = document.querySelector(`#table option[value="${tableMax}"]`);
     tableMin = parseInt(selectedOption.getAttribute('data-min'));
@@ -107,14 +107,4 @@ function clearBet(){
     document.querySelectorAll('.placedChip').forEach((chip) =>{
         chip.remove();
     })
-}
-
-
-
-function resetBets(){
-    bet = 0;
-    clearBet();
-    //reset bet list
-    canStart = false;
-    startBtn.classList.add('disabled');
 }

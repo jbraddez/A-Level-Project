@@ -123,6 +123,7 @@ const dealerBox = document.getElementById('dealerBox');
 //start
 function start(){
     if(!canStart){
+        showNotification('Place a Bet',' Please place a bet to begin','red');
         return;
     }
     if(bet < tableMin){

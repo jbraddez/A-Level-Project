@@ -17,6 +17,10 @@ function start(){
         showNotification('Please Wait','The current round has not finished, please be patient', 'red');
         return
     }
+    if(!canStart){
+        showNotification('No Bets Placed','Please place a bet before starting the round', 'red');
+        return;
+    }
 
     minusChips(bet);
     spin();

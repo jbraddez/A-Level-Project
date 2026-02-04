@@ -9,7 +9,7 @@ let bet = 0;
 let canStart = false;
 
 tableSelect.addEventListener('change',(event)=>{
-    resetBets();
+    clearBet();
     tableMax = parseInt(event.target.value);
     const selectedOption = document.querySelector(`#table option[value="${tableMax}"]`);
     tableMin = parseInt(selectedOption.getAttribute('data-min'));
@@ -69,14 +69,6 @@ function clearBet(){
     bet = 0;
     betAmountEl.textContent = '';
     betsCont.innerHTML = '';
-    canStart = false;
-    startBtn.classList.add('disabled');
-}
-
-
-
-function resetBets(){
-    bet = 0;
     canStart = false;
     startBtn.classList.add('disabled');
 }

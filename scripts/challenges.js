@@ -26,6 +26,6 @@ function shareForChips(){
       }
 }
 
-if(localStorage.getItem('chips') < 500){
+if(parseInt(localStorage.getItem('chips')) < 500){
   document.getElementById('freeChips').style.display = 'block';
 }
