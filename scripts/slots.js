@@ -60,13 +60,13 @@ function hit() {
     currentBet = bet;
     const chips = getChips();
 
-    if(bet > chips){
-        showNotification('Insufficient Chips', 'Feel free to gather free chips from a challenge.','red');//POSSIBLY CHANGE -----------
+     if(spinning){
+        showNotification('Be Patient', 'Please wait for the machine to stop spinning.','red');
         return
     }
 
-    if(spinning){
-        showNotification('Be Patient', 'Please wait for the machine to stop spinning.','red');
+    if(bet > chips){
+        showNotification('Insufficient Chips', 'Feel free to gather free chips from a challenge.','red');//POSSIBLY CHANGE -----------
         return
     }
 

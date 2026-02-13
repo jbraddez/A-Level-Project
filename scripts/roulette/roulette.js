@@ -133,6 +133,7 @@ function checkResult(landedNumber) {
         }
 
         if(win){
+            //payout bet plus winnings -- bet * multiplier
             const winnings = betAmount * (multiplier + 1);
             totalWinnings += winnings;
         }
